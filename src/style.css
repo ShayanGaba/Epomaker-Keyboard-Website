@@ -1,0 +1,851 @@
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   CINEMATIC SCROLL WARP & SCROLLSPY
+   ========================================================================== */
+
+/* Prevent default rigid instant snap */
+html {
+  scroll-behavior: auto !important; /* Managed dynamically via JS for custom easing */
+}
+
+/* Base styling for page sections to support cinematic scaling & blurring */
+section, 
+.bento-section, 
+header,
+main > div {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter, opacity;
+}
+
+/* Active warp phase: applied to the body while programmatically scrolling */
+body.is-scrolling section,
+body.is-scrolling .bento-section,
+body.is-scrolling header,
+body.is-scrolling main > div {
+  filter: blur(3px) brightness(0.35); /* Elegant motion blur and dimming */
+  transform: scale(0.97); /* Subtle pull-back/depth effect */
+}
+
+/* Ensure the desktop navigation & mobile drawer don't blur or scale during scroll */
+#terminal-drawer,
+nav, 
+.navbar {
+  filter: none !important;
+  transform: none !important;
+}
+
+:root {
+  --bg-color: #050505;
+  /* Deep Obsidian Black to match code.html */
+  --text-color: #e2e2e4;
+  --text-muted: #8e9192;
+  --accent-color: #5f6262;
+  /* Modern Cyber Cyan */
+  --accent-glow: rgba(0, 240, 255, 0.4);
+  --glass-bg: rgba(26, 26, 30, 0.8);
+  --glass-border: rgba(42, 42, 46, 0.8);
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Loader Screen Overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.loader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.loader-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 2.2rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 30%, #5f6262 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: logo-shimmer 2.5s ease infinite alternate;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #5f6262, #7df4ff);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transition: width 0.1s ease;
+}
+
+.progress-text-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* Sticky Canvas Container */
+.canvas-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
+#animation-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Subtle Vignette Overlay */
+.canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(5, 5, 5, 0.8) 100%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PREMIUM FLOATING CAPSULE NAVIGATION STYLES
+   ========================================================================== */
+
+/* Header Wrapper */
+#main-header {
+  transform: translateY(0);
+}
+
+/* Base Glass Dock States */
+#nav-dock {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animated Hover Indicator Lines */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #FFFFFF, #5f6262);
+  /* White/Cyan matched gradient */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Active Menu Item Glow State */
+.nav-link.active {
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.nav-link.active::after {
+  transform: scaleX(1);
+  background: #5f6262;
+}
+
+/* Dynamically loaded compact styling (Applied on scroll via JS) */
+.header-scrolled #nav-dock {
+  background-color: #050505/85 !important;
+  /* Denser glass to stay readable over text */
+  padding-top: 0.6rem !important;
+  padding-bottom: 0.6rem !important;
+  border-color: rgba(0, 240, 255, 0.15) !important;
+  /* Subtle cyberpunk cyan border glow */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.05);
+}
+
+.header-scrolled {
+  padding-top: 0.8rem !important;
+  /* Floating Dock pulls tight to screen edge */
+}
+
+/* Interactive custom hamburger animation styling */
+#mobile-menu-toggle:hover span:first-child {
+  transform: translateY(-1px);
+}
+
+#mobile-menu-toggle:hover span:last-child {
+  transform: translateY(1px);
+}
+
+/* Epomaker Galaxy65 Title Overlay */
+/* Epomaker Galaxy65 Title Overlay - Positioned elegant and slightly above center */
+/* ==========================================================================
+   1. BASE STYLES (Default / Large Desktops & Screens > 1200px Wide)
+   ========================================================================== */
+.animation-title-container {
+  position: absolute;
+  top: 42%;
+  /* Sits perfectly just above the exact screen center */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  width: 95%;
+  max-width: 1000px;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out, visibility 0.15s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Awwwards Heading style with white/black keyboard-matched gradients */
+.scroll-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 9rem;
+  /* Exactly your desktop size */
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.25em;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95));
+}
+
+/* Whitish Keycaps Metallic Gradient */
+.scroll-title .text-white-metallic {
+  background: linear-gradient(180deg, #FFFFFF 30%, #B0B3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Blackish Outer Frame/Spacebar Gradient */
+.scroll-title .text-black-metallic {
+  background: linear-gradient(180deg, #7E848F 0%, #1A1A1E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Subtle highlight line so the obsidian text stands out perfectly on dark backdrops */
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Subheading: Space Grotesk split font styling */
+.scroll-subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  /* Exactly your desktop size */
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6ch;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+}
+
+/* Whitish subtitle split */
+.scroll-subtitle .sub-white {
+  background: linear-gradient(120deg, #FFFFFF 40%, #9CA3AF 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Blackish subtitle split */
+.scroll-subtitle .sub-black {
+  background: linear-gradient(120deg, #9CA3AF 0%, #3F4145 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* ==========================================================================
+   2. RESPONSIVE BREAKPOINTS (Fluid Transitions - No Code Broken)
+   ========================================================================== */
+
+/* Laptop & Medium Desktops (Max-width: 1200px) */
+@media (max-width: 1200px) {
+  .scroll-title {
+    font-size: 7rem;
+    /* Scale down gracefully so it doesn't wrap awkwardly */
+  }
+
+  .scroll-subtitle {
+    font-size: 1.6rem;
+    max-width: 850px;
+  }
+}
+
+/* Tablets & Landscape Mobiles (Max-width: 992px) */
+@media (max-width: 992px) {
+  .scroll-title {
+    font-size: 5.5rem;
+    gap: 0.2em;
+  }
+
+  .scroll-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+    max-width: 680px;
+  }
+
+  .animation-title-container {
+    top: 40%;
+    /* Sits slightly higher to balance vertical screen heights */
+    gap: 1rem;
+  }
+}
+
+/* Standard Mobile Devices (Max-width: 768px) */
+@media (max-width: 768px) {
+  .scroll-title {
+    font-size: 3.5rem;
+    /* Exactly your mobile size */
+    flex-direction: column;
+    /* Stacks the two words vertically to fit phone viewports */
+    gap: 0;
+  }
+
+  .scroll-subtitle {
+    font-size: 0.9rem;
+    /* Exactly your mobile size */
+    letter-spacing: 0.12em;
+    padding: 0 15px;
+    /* Safe padding prevents text from touching screen edges */
+    line-height: 1.5;
+  }
+
+  .animation-title-container {
+    top: 38%;
+    /* Exactly your mobile position */
+    gap: 0.8rem;
+  }
+}
+
+/* Tiny Screens / Narrow Foldables (Max-width: 380px) */
+@media (max-width: 380px) {
+  .scroll-title {
+    font-size: 2.6rem;
+    /* Extra down-scaling for very narrow phones (e.g. iPhone SE) */
+  }
+
+  .scroll-subtitle {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Scroll Container & Sections - Absolute to overlay sticky canvas */
+.scroll-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.narrative-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  position: relative;
+}
+
+/* Section Positionings */
+.narrative-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+  /* enable interactions inside card */
+}
+
+/* Show classes dynamically loaded via JS */
+.narrative-section.active .narrative-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.narrative-card.left {
+  margin-right: auto;
+}
+
+.narrative-card.right {
+  margin-left: auto;
+}
+
+.narrative-card.center {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 540px;
+}
+
+.card-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--accent-color);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.narrative-card h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.narrative-card p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ==========================================================================
+   PREMIUM MOBILE TERMINAL DRAWER STYLES
+   ========================================================================== */
+
+/* Drawer Base Link Styling */
+/* ==========================================================================
+   PREMIUM KEYBOARD DRAWER STYLES
+   ========================================================================== */
+
+/* Drawer Link Base */
+.drawer-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  color: #8e9192;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover States */
+.drawer-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Selected/Active Link (Fitted for Epomaker Cyber-Cyan vibe) */
+.drawer-link.active {
+  color: #5f6262 !important;
+  background: rgba(0, 240, 255, 0.04) !important;
+  border-color: rgba(0, 240, 255, 0.15) !important;
+  box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.03);
+}
+
+/* Vertical glowing active-indicator */
+.drawer-link .active-indicator {
+  width: 2px;
+  height: 16px;
+  background: #5f6262;
+  border-radius: 4px;
+  opacity: 0;
+  transform: scaleY(0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px #5f6262;
+}
+
+.drawer-link.active .active-indicator {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* Dynamic icon motion on hover */
+.drawer-link span.material-symbols-outlined {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.drawer-link:hover span.material-symbols-outlined {
+  transform: scale(1.1) translateX(2px);
+  color: #ffffff;
+}
+
+.drawer-link.active span.material-symbols-outlined {
+  color: #5f6262;
+}
+
+/* Replay Button */
+.action-btn {
+  background: linear-gradient(135deg, #5f6262 0%, #00545a 100%);
+  border: none;
+  color: #fff;
+  padding: 0.85rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.05em;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(0, 240, 255, 0.4);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Scroll Hint (Mouse Animation) */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 2px solid var(--text-muted);
+  border-radius: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.mouse-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-wheel-anim 1.6s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes logo-shimmer {
+  0% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.6));
+  }
+}
+
+@keyframes scroll-wheel-anim {
+  0% {
+    top: 6px;
+    opacity: 1;
+  }
+
+  80% {
+    top: 18px;
+    opacity: 0;
+  }
+
+  100% {
+    top: 6px;
+    opacity: 0;
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .narrative-section {
+    padding: 0 5%;
+  }
+
+  .narrative-card {
+    padding: 1.75rem;
+    max-width: 100%;
+  }
+
+  .narrative-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .narrative-card p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================================================
+   STYLING MERGED FROM code.html
+   ========================================================================== */
+
+/* Custom Cursor */
+/* ==========================================================================
+   PREMIUM CUSTOM CURSOR (Magnetic & Blend Mode)
+   ========================================================================== */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+    /* Hides default cursor */
+  }
+}
+
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* The tiny tracking dot */
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background-color: #272525;
+  transition: opacity 0.2s ease-out;
+}
+
+/* The smooth trailing outline with inverted blend-mode */
+.cursor-outline {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(188, 199, 199, 0.4);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  /* This makes it invert colors when it hovers over text! */
+  mix-blend-mode: difference;
+}
+
+/* --- Hover States (Magnetic Expansion) --- */
+.cursor-hover .cursor-outline {
+  width: 65px;
+  /* Expands smoothly */
+  height: 65px;
+  background-color: #ffffff;
+  /* Fills white, but 'difference' mode makes it look inverted/glassy */
+  border-color: transparent;
+  mix-blend-mode: difference;
+}
+
+.cursor-hover .cursor-dot {
+  opacity: 0;
+  /* Hides the center dot when hovering over a link */
+}
+
+/* Marquee */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  background-color: #1A1A1E;
+  border-top: 1px solid #2A2A2E;
+  border-bottom: 1px solid #2A2A2E;
+  padding: 1rem 0;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-item {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 700;
+  color: #444748;
+  margin: 0 2rem;
+  text-transform: uppercase;
+}
+
+.marquee-item.accent {
+  color: #5f6262;
+}
+
+/* Base Card Styling */
+.obsidian-card {
+  background-color: #1A1A1E;
+  border: 1px solid #2A2A2E;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.obsidian-card:hover {
+  border-color: #5f6262;
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.obsidian-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+/* Glow effects */
+.glow-border {
+  border: 1px solid #2A2A2E;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.glow-border:hover,
+.glow-border:focus-within {
+  border-color: #5f6262;
+  box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+/* 3D Tilt Effect */
+.tilt-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+.tilt-card-inner {
+  transform: translateZ(30px);
+}
+
+/* Acoustic Grids */
+.acoustic-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2E;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5f6262;
+}
+
+/* Utility */
+.clip-text {
+  background: linear-gradient(90deg, #fff, #8e9192);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

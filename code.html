@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OBSIDIAN // 75 - TACTILE RAWNESS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#111415",
+                        "secondary-fixed": "#7df4ff",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#47464b",
+                        "inverse-primary": "#5f5e5e",
+                        "on-secondary-container": "#00686f",
+                        "background": "#111415",
+                        "on-primary-container": "#797777",
+                        "outline-variant": "#444748",
+                        "primary": "#c9c6c5",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "on-background": "#e2e2e4",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#e4e1e7",
+                        "surface-container-high": "#282a2c",
+                        "on-tertiary-container": "#78777c",
+                        "on-secondary-fixed": "#002022",
+                        "on-secondary": "#00363a",
+                        "on-surface": "#e2e2e4",
+                        "secondary": "#d3fbff",
+                        "surface-bright": "#37393b",
+                        "secondary-fixed-dim": "#00dbe9",
+                        "secondary-container": "#00eefc",
+                        "tertiary": "#c8c5cb",
+                        "surface-container": "#1e2021",
+                        "surface-tint": "#c9c6c5",
+                        "on-tertiary": "#303034",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#333537",
+                        "outline": "#8e9192",
+                        "surface-container-low": "#1a1c1d",
+                        "surface-container-lowest": "#0c0e10",
+                        "inverse-on-surface": "#2f3132",
+                        "tertiary-fixed-dim": "#c8c5cb",
+                        "surface-variant": "#333537",
+                        "on-tertiary-fixed": "#1b1b1f",
+                        "error-container": "#93000a",
+                        "on-primary": "#313030",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface-dim": "#111415",
+                        "tertiary-container": "#050508",
+                        "on-primary-fixed-variant": "#474646",
+                        "primary-container": "#050505",
+                        "primary-fixed": "#e5e2e1",
+                        "inverse-surface": "#e2e2e4",
+                        "on-surface-variant": "#c4c7c7"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "none": "0px"
+                    },
+                    spacing: {
+                        "margin-desktop": "64px",
+                        "container-max": "1440px",
+                        "unit": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "body-md": ["JetBrains Mono"],
+                        "spec-code": ["JetBrains Mono"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-xl": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }],
+                        "spec-code": ["12px", { lineHeight: "18px", letterSpacing: "-0.01em", fontWeight: "500" }],
+                        "headline-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "display-xl": ["84px", { lineHeight: "90px", letterSpacing: "-0.04em", fontWeight: "700" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "38px", fontWeight: "600" }],
+                        "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505; /* Deep Matte Obsidian */
+            color: #e2e2e4;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background-color: #00F0FF;
+        }
+
+        .cursor-outline {
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+        }
+
+        .cursor-hover .cursor-dot {
+            background-color: transparent;
+        }
+
+        .cursor-hover .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border-color: #00F0FF;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            background-color: #1A1A1E;
+            border-top: 1px solid #2A2A2E;
+            border-bottom: 1px solid #2A2A2E;
+            padding: 1rem 0;
+        }
+        
+        .marquee-content {
+            display: flex;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-style: italic;
+            font-weight: 700;
+            color: #444748;
+            margin: 0 2rem;
+            text-transform: uppercase;
+        }
+        
+        .marquee-item.accent {
+            color: #00F0FF;
+        }
+
+        /* Base Card Styling */
+        .obsidian-card {
+            background-color: #1A1A1E;
+            border: 1px solid #2A2A2E;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .obsidian-card:hover {
+            border-color: #00F0FF;
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .obsidian-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%);
+            pointer-events: none;
+        }
+
+        /* Glow effects */
+        .glow-border {
+            border: 1px solid #2A2A2E;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .glow-border:hover, .glow-border:focus-within {
+            border-color: #00F0FF;
+            box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.3);
+        }
+        
+        /* 3D Tilt Effect applied via JS */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        .tilt-card-inner {
+            transform: translateZ(30px);
+        }
+
+        /* Acoustic Grids */
+        .acoustic-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #2A2A2E; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+        
+        /* Utility */
+        .clip-text {
+            background: linear-gradient(90deg, #fff, #8e9192);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-secondary-container selection:text-primary-container">
+<!-- Custom Cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-outline-variant flex justify-between items-center px-margin-desktop py-4" data-component="TopNavBar">
+<div class="font-headline-lg-mobile text-headline-lg-mobile italic font-bold text-primary dark:text-primary tracking-tighter cursor-hover-target">
+            OBSIDIAN // 75
+        </div>
+<div class="hidden md:flex space-x-8 font-body-md text-body-md uppercase tracking-widest">
+<a class="text-on-surface-variant hover:text-secondary-container transition-colors duration-300 cursor-hover-target" href="#">Soundboard</a>
+<a class="text-secondary-container font-bold border-b border-secondary-container cursor-hover-target" href="#">Configurator</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-colors duration-300 cursor-hover-target" href="#">Blueprint</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-colors duration-300 cursor-hover-target" href="#">Specs</a>
+</div>
+<div class="flex space-x-6 text-primary">
+<span class="material-symbols-outlined cursor-hover-target hover:text-secondary-container transition-colors" data-icon="dark_mode">dark_mode</span>
+<span class="material-symbols-outlined cursor-hover-target hover:text-secondary-container transition-colors" data-icon="shopping_cart">shopping_cart</span>
+</div>
+</nav>
+<!-- Side Nav (Terminal Drawer Trigger area) -->
+<aside class="fixed right-0 top-1/2 -translate-y-1/2 h-full w-12 z-40 hidden xl:flex flex-col items-center justify-center border-l border-outline-variant bg-surface/50 backdrop-blur-sm cursor-hover-target group" onclick="document.getElementById('terminal-drawer').classList.toggle('translate-x-full')">
+<div class="rotate-90 whitespace-nowrap font-label-sm text-label-sm text-outline group-hover:text-secondary-container transition-colors tracking-widest">
+            ACCESS TERMINAL // V.02
+        </div>
+</aside>
+<main class="pt-[80px]">
+<!-- HERO SECTION -->
+<section class="min-h-[921px] flex flex-col lg:flex-row border-b border-[#2A2A2E]">
+<!-- Left Panel -->
+<div class="flex-1 p-margin-mobile md:p-margin-desktop flex flex-col justify-center border-r border-[#2A2A2E] bg-surface relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,240,255,0.05)_0%,transparent_50%)]"></div>
+<div class="z-10 relative">
+<div class="flex flex-wrap gap-4 mb-8">
+<span class="border border-outline-variant px-3 py-1 font-spec-code text-spec-code text-on-surface uppercase backdrop-blur-sm bg-surface-container-high/30">CNC Aluminum Frame</span>
+<span class="border border-secondary-container px-3 py-1 font-spec-code text-spec-code text-secondary-container uppercase backdrop-blur-sm bg-secondary-container/10">Sub-1ms Latency</span>
+</div>
+<h1 class="font-display-xl text-display-xl italic font-bold text-on-surface mb-4 tracking-tighter leading-none" style="font-family: 'Arial Black', Impact, sans-serif;">
+                        OBSIDIAN // 75.
+                        <br/>
+<span class="clip-text">TACTILE RAWNESS.</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-12">
+                        Engineered for absolute precision. Machined from solid aerospace-grade aluminum, featuring hot-swappable acoustics and sub-millisecond telemetry.
+                    </p>
+<button class="bg-primary text-primary-container px-8 py-4 font-label-sm text-label-sm uppercase tracking-widest cursor-hover-target hover:bg-white transition-colors flex items-center gap-2 w-fit">
+                        INITIALIZE SYNC <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Right Panel (3D Interactive Card) -->
+<div class="flex-1 bg-[#0a0a0c] relative flex items-center justify-center p-8 overflow-hidden group">
+<!-- Background Grid -->
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#444748 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- 3D Card Container -->
+<div class="tilt-card w-full max-w-lg aspect-[4/3] cursor-hover-target">
+<div class="obsidian-card w-full h-full p-1 relative flex flex-col">
+<div class="absolute top-4 right-4 z-20 flex gap-2">
+<div class="w-2 h-2 rounded-none bg-error animate-pulse"></div>
+<span class="font-spec-code text-[10px] text-error">LIVE TELEMETRY</span>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-[#2A2A2E] m-2 flex items-center justify-center tilt-card-inner relative overflow-hidden" data-alt="A highly detailed, ultra-premium top-down 3D render of an industrial 75% mechanical keyboard on a dark slate background. The keyboard features dark obsidian and slate gray keycaps, a prominent CNC machined metallic rotary encoder dial in the top right, and sleek, hard-edged aluminum bezels. The lighting is dramatic, highlighting the metallic textures and creating a moody, tech-noir aesthetic with subtle ice-blue glowing accents on the indicators." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')">
+<div class="absolute bottom-4 left-4 font-spec-code text-spec-code text-secondary-container">RENDER: ACTIVE</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BENTO FEATURES -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-[#050505]">
+<div class="flex justify-between items-end mb-12 border-b border-[#2A2A2E] pb-4">
+<h2 class="font-headline-lg text-headline-lg italic text-on-surface" style="font-family: 'Arial Black', Impact, sans-serif;">SYSTEM ARCHITECTURE</h2>
+<span class="font-spec-code text-spec-code text-outline hidden md:block">[ DIAGNOSTICS_RUNNING ]</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[240px]">
+<!-- Card 1 (Large) -->
+<div class="obsidian-card md:col-span-2 md:row-span-2 p-6 flex flex-col justify-end relative cursor-hover-target group" data-alt="A macro, side-profile view of a heavy, dark grey CNC-machined aluminum mechanical keyboard chassis. The focus is on the sharp, industrial angles, the anodized metal texture, and the precision milling. Cinematic side lighting emphasizes the hard edges and raw material quality against a pitch-black background." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+<div class="relative z-10">
+<span class="font-spec-code text-spec-code text-secondary-container mb-2 block">01 // CHASSIS</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white leading-tight">Anodized CNC Aluminum</h3>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="obsidian-card p-6 flex flex-col justify-between cursor-hover-target" data-alt="Close-up of a premium, knurled metallic rotary encoder knob on a dark mechanical keyboard. The knob has a brushed steel finish with precision-cut grip lines. Ice-blue underglow subtly illuminates the base of the knob. High contrast, technical aesthetic." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-black/60"></div>
+<span class="relative z-10 material-symbols-outlined text-outline">tune</span>
+<div class="relative z-10">
+<span class="font-spec-code text-spec-code text-outline mb-1 block">02 // CONTROL</span>
+<h4 class="font-body-md text-white font-bold uppercase">Rotary Encoder</h4>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="obsidian-card p-6 flex flex-col justify-between bg-surface-container-high cursor-hover-target">
+<span class="material-symbols-outlined text-outline">terminal</span>
+<div>
+<span class="font-spec-code text-spec-code text-outline mb-1 block">03 // ENGINE</span>
+<h4 class="font-body-md text-white font-bold uppercase">Multi-OS Native</h4>
+<div class="w-full h-1 bg-[#1A1A1E] mt-4"><div class="w-3/4 h-full bg-secondary-container"></div></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="obsidian-card p-6 flex flex-col justify-between bg-surface-container-high cursor-hover-target">
+<span class="material-symbols-outlined text-outline">memory</span>
+<div>
+<span class="font-spec-code text-spec-code text-outline mb-1 block">04 // PCB</span>
+<h4 class="font-body-md text-white font-bold uppercase">Hot-Swappable Core</h4>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="obsidian-card md:col-span-2 p-6 flex flex-col justify-end relative cursor-hover-target" data-alt="A dramatic close-up of custom mechanical keyboard keycaps. The keycaps have a unique dual-tone design: dark obsidian gray on top with translucent ice-blue sides that catch the light. The typography on the keys is sharp, technical, and minimalist. Dark background, studio lighting." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+<div class="relative z-10 w-1/2">
+<span class="font-spec-code text-spec-code text-secondary-container mb-2 block">05 // INTERFACE</span>
+<h4 class="font-body-md text-white font-bold uppercase text-lg">Signature Ice Keycaps</h4>
+</div>
+</div>
+</div>
+</section>
+<!-- MARQUEE DIVIDER 1 -->
+<div class="marquee-container">
+<div class="marquee-content">
+<span class="marquee-item">ACOUSTIC PRECISION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">TACTILE FEEDBACK</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">SONIC ENGINEERING</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">ACOUSTIC PRECISION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">TACTILE FEEDBACK</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">SONIC ENGINEERING</span>
+<span class="marquee-item accent">//</span>
+</div>
+<div aria-hidden="true" class="marquee-content">
+<span class="marquee-item">ACOUSTIC PRECISION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">TACTILE FEEDBACK</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">SONIC ENGINEERING</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">ACOUSTIC PRECISION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">TACTILE FEEDBACK</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">SONIC ENGINEERING</span>
+<span class="marquee-item accent">//</span>
+</div>
+</div>
+<!-- CRAFT YOUR CLICK (Acoustics) -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg italic text-on-surface mb-4" style="font-family: 'Arial Black', Impact, sans-serif;">CRAFT YOUR CLICK</h2>
+<p class="font-spec-code text-spec-code text-outline">SELECT SWITCH TYPE TO AUDIT SOUND PROFILE</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+<!-- ICE TACTILE -->
+<button class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn" data-sound="clack">
+<div class="acoustic-bg-text">ICE</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card" data-alt="A 3D render of a single mechanical keyboard switch housing. The housing is made of translucent polycarbonate, and the stem in the center is a bright, icy blue color. The switch sits alone on a dark, reflective surface, highly detailed, technical aesthetic." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover;">
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">ICE TACTILE <span class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+</div>
+</button>
+<!-- GLIDE LINEAR -->
+<button class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn" data-sound="thock">
+<div class="acoustic-bg-text">GLIDE</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card" data-alt="A 3D render of a single mechanical keyboard switch. The housing is opaque slate gray, and the stem is a smooth, deep red linear style. The switch is isolated on a dark obsidian background, emphasizing its precise, smooth construction. Macro photography style." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover;">
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">GLIDE LINEAR <span class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+</div>
+</button>
+<!-- SLATE SILENT -->
+<button class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn" data-sound="pop">
+<div class="acoustic-bg-text">MUTE</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card" data-alt="A 3D render of a single silent mechanical keyboard switch. The housing is dark, frosted gray, and the stem is a muted, pale gray with rubber dampening pads visible. Technical, clean, minimalist lighting against a black backdrop." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover;">
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">SLATE SILENT <span class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+</div>
+</button>
+<!-- HEAVY CLICK -->
+<button class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn" data-sound="click">
+<div class="acoustic-bg-text">HEAVY</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card" data-alt="A 3D render of a single clicky mechanical keyboard switch. The housing is clear acrylic, revealing a complex metal leaf and a dark, heavy green stem mechanism inside. High contrast, sharp edges, industrial vibe against a dark void background." style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-size: cover;">
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">HEAVY CLICK <span class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+</div>
+</button>
+</div>
+</section>
+<!-- MARQUEE DIVIDER 2 -->
+<div class="marquee-container">
+<div class="marquee-content">
+<span class="marquee-item">PREMIUM CUSTOMIZATION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">MODULAR DESIGN</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">AESTHETIC CONTROL</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">PREMIUM CUSTOMIZATION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">MODULAR DESIGN</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">AESTHETIC CONTROL</span>
+<span class="marquee-item accent">//</span>
+</div>
+<div aria-hidden="true" class="marquee-content">
+<span class="marquee-item">PREMIUM CUSTOMIZATION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">MODULAR DESIGN</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">AESTHETIC CONTROL</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">PREMIUM CUSTOMIZATION</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">MODULAR DESIGN</span>
+<span class="marquee-item accent">//</span>
+<span class="marquee-item">AESTHETIC CONTROL</span>
+<span class="marquee-item accent">//</span>
+</div>
+</div>
+<!-- KEYCAP CONFIGURATOR -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-[#050505] min-h-screen flex flex-col">
+<div class="mb-12 flex justify-between items-end border-b border-[#2A2A2E] pb-4">
+<h2 class="font-headline-lg text-headline-lg italic text-on-surface" style="font-family: 'Arial Black', Impact, sans-serif;">VISUAL MATRIX</h2>
+<span class="font-spec-code text-spec-code text-outline hidden md:block">[ AESTHETIC_OVERRIDE_ENABLED ]</span>
+</div>
+<div class="flex-1 flex flex-col relative">
+<!-- Visualizer Area -->
+<div class="flex-1 min-h-[400px] border border-[#2A2A2E] bg-surface-container-low mb-8 relative flex items-center justify-center overflow-hidden" id="config-visualizer">
+<div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(#444748 1px, transparent 1px), linear-gradient(90deg, #444748 1px, transparent 1px); background-size: 40px 40px;"></div>
+<!-- Dynamic Image Placeholder based on selection -->
+<img alt="Configurator View" class="relative z-10 w-full max-w-4xl object-contain transition-opacity duration-500" data-alt="A top-down, flat-lay orthographic view of the Obsidian // 75 mechanical keyboard. The keyboard currently features the 'Obsidian Dark' colorway: deeply saturated matte black keycaps, a dark slate aluminum chassis, and stark white technical legends on the keys. Studio lighting, pure black background, highly clinical and minimalist." id="configurator-img" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Selector Bar -->
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+<span class="font-spec-code text-spec-code text-outline mr-4">COLOR_SCHEME:</span>
+<div class="flex flex-wrap gap-2 justify-center">
+<button class="config-btn active px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-secondary-container border-secondary-container" data-color="dark">Obsidian Dark</button>
+<button class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]" data-color="frost">Glacier Frost</button>
+<button class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]" data-color="slate">Nordic Slate</button>
+<button class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]" data-color="white">Chalk White</button>
+<button class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]" data-color="blue">Cyber Blue</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA SECTION -->
+<section class="py-32 bg-surface border-t border-[#2A2A2E] flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background FX -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<span class="font-spec-code text-spec-code text-secondary-container mb-6 block tracking-widest uppercase">Experience Peak Performance</span>
+<button class="group relative px-12 py-6 bg-transparent overflow-hidden cursor-hover-target border border-[#2A2A2E] rounded-none">
+<div class="absolute inset-0 bg-gradient-to-r from-secondary-container/20 to-transparent translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+<span class="relative z-10 font-headline-lg-mobile text-headline-lg-mobile italic font-bold text-on-surface group-hover:text-secondary-container transition-colors tracking-tighter flex items-center gap-4" style="font-family: 'Arial Black', Impact, sans-serif;">
+                     RESERVE OBSIDIAN // 75 <span class="material-symbols-outlined text-4xl">chevron_right</span>
+</span>
+</button>
+</section>
+<!-- Footer from JSON -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center justify-center py-12 px-margin-desktop gap-8" data-component="Footer">
+<div class="font-headline-lg text-headline-lg italic text-primary font-bold tracking-tighter">OBSIDIAN // 75</div>
+<div class="flex flex-wrap gap-8 font-spec-code text-spec-code text-outline">
+<a class="hover:text-primary underline opacity-80 hover:opacity-100 transition-opacity cursor-hover-target" href="#">Privacy Protocol</a>
+<a class="hover:text-primary underline opacity-80 hover:opacity-100 transition-opacity cursor-hover-target" href="#">Terms of Deployment</a>
+<a class="hover:text-primary underline opacity-80 hover:opacity-100 transition-opacity cursor-hover-target" href="#">Technical Support</a>
+</div>
+<div class="font-spec-code text-spec-code text-outline opacity-60">
+                © 2024 OBSIDIAN INDUSTRIES. ALL RIGHTS RESERVED.
+            </div>
+</footer>
+</main>
+<!-- Side Nav Drawer (Hidden by default) -->
+<div class="fixed right-0 top-0 h-full w-80 z-50 bg-surface dark:bg-surface border-l border-outline-variant flex flex-col p-6 space-y-8 translate-x-full transition-transform duration-300 ease-in-out" data-component="SideNavBar" id="terminal-drawer">
+<!-- Close Button -->
+<button class="absolute top-4 right-4 text-outline hover:text-secondary-container cursor-hover-target" onclick="document.getElementById('terminal-drawer').classList.add('translate-x-full')">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex items-center gap-4 border-b border-outline-variant pb-6 mt-4">
+<div class="w-12 h-12 bg-secondary-container/10 border border-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container">smart_toy</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-secondary-container tracking-widest">NEURAL CONCIERGE</div>
+<div class="font-spec-code text-spec-code text-outline text-[10px]">V.02-ALPHA ACTIVE</div>
+</div>
+</div>
+<nav class="flex flex-col gap-2 font-spec-code text-spec-code">
+<a class="flex items-center gap-3 p-3 text-secondary-container bg-secondary-container/10 border-r-2 border-secondary-container transition-all duration-200 ease-in-out cursor-hover-target" href="#">
+<span class="material-symbols-outlined">memory</span> Diagnostics
+            </a>
+<a class="flex items-center gap-3 p-3 text-outline hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 ease-in-out cursor-hover-target" href="#">
+<span class="material-symbols-outlined">terminal</span> Terminal
+            </a>
+<a class="flex items-center gap-3 p-3 text-outline hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 ease-in-out cursor-hover-target" href="#">
+<span class="material-symbols-outlined">psychology</span> Neural Net
+            </a>
+<a class="flex items-center gap-3 p-3 text-outline hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 ease-in-out cursor-hover-target" href="#">
+<span class="material-symbols-outlined">database</span> System Log
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant">
+<button class="w-full py-3 border border-secondary-container text-secondary-container font-label-sm text-label-sm uppercase hover:bg-secondary-container hover:text-surface transition-colors cursor-hover-target">
+                INITIALIZE SYNC
+            </button>
+</div>
+</div>
+<!-- Interactive Scripts -->
+<script>
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverTargets = document.querySelectorAll('.cursor-hover-target, button, a');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Add a slight delay to the outline for a trailing effect
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 100, fill: "forwards" });
+        });
+
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => {
+                document.body.classList.add('cursor-hover');
+            });
+            target.addEventListener('mouseleave', () => {
+                document.body.classList.remove('cursor-hover');
+            });
+        });
+
+        // 3D Tilt Effect
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+                card.style.transition = 'transform 0.5s ease';
+                setTimeout(() => { card.style.transition = ''; }, 500);
+            });
+        });
+
+        // Web Audio API Synthesis for Switches
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSynthesizedSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            const filter = audioCtx.createBiquadFilter();
+            
+            osc.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            const now = audioCtx.currentTime;
+            
+            switch(type) {
+                case 'thock': // Deep, resonant, muted
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(150, now);
+                    osc.frequency.exponentialRampToValueAtTime(40, now + 0.1);
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(800, now);
+                    gainNode.gain.setValueAtTime(0, now);
+                    gainNode.gain.linearRampToValueAtTime(0.8, now + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                    break;
+                case 'clack': // Higher pitch, sharp
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(400, now);
+                    osc.frequency.exponentialRampToValueAtTime(200, now + 0.05);
+                    filter.type = 'bandpass';
+                    filter.frequency.setValueAtTime(2000, now);
+                    gainNode.gain.setValueAtTime(0, now);
+                    gainNode.gain.linearRampToValueAtTime(0.5, now + 0.005);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now);
+                    osc.stop(now + 0.1);
+                    break;
+                case 'pop': // Very short, quiet, muted
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.exponentialRampToValueAtTime(100, now + 0.05);
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(400, now);
+                    gainNode.gain.setValueAtTime(0, now);
+                    gainNode.gain.linearRampToValueAtTime(0.3, now + 0.005);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                    break;
+                case 'click': // Sharp transient, noisy
+                    // Needs white noise for click
+                    const bufferSize = audioCtx.sampleRate * 0.05; // 50ms
+                    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        data[i] = Math.random() * 2 - 1;
+                    }
+                    const noise = audioCtx.createBufferSource();
+                    noise.buffer = buffer;
+                    
+                    const noiseFilter = audioCtx.createBiquadFilter();
+                    noiseFilter.type = 'highpass';
+                    noiseFilter.frequency.value = 3000;
+                    
+                    const noiseGain = audioCtx.createGain();
+                    noiseGain.gain.setValueAtTime(0.5, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                    
+                    noise.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
+                    noiseGain.connect(audioCtx.destination);
+                    
+                    noise.start(now);
+                    
+                    // Add fundamental tone
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+                    gainNode.gain.setValueAtTime(0, now);
+                    gainNode.gain.linearRampToValueAtTime(0.3, now + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now);
+                    osc.stop(now + 0.1);
+                    break;
+            }
+        }
+
+        document.querySelectorAll('.switch-audio-btn').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                const sound = btn.getAttribute('data-sound');
+                playSynthesizedSound(sound);
+                
+                // Visual feedback
+                btn.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Configurator Logic
+        const configBtns = document.querySelectorAll('.config-btn');
+        const configImg = document.getElementById('configurator-img');
+
+        const configPrompts = {
+            'dark': "A top-down, flat-lay orthographic view of the Obsidian // 75 mechanical keyboard. The keyboard currently features the 'Obsidian Dark' colorway: deeply saturated matte black keycaps, a dark slate aluminum chassis, and stark white technical legends on the keys. Studio lighting, pure black background, highly clinical and minimalist.",
+            'frost': "A top-down, flat-lay orthographic view of the Obsidian // 75 mechanical keyboard. The keyboard currently features the 'Glacier Frost' colorway: semi-translucent frosted white keycaps that catch light, a silver-anodized aluminum chassis, and subtle grey legends. Studio lighting, pure black background, emphasizing the ice-like texture.",
+            'slate': "A top-down, flat-lay orthographic view of the Obsidian // 75 mechanical keyboard. The keyboard currently features the 'Nordic Slate' colorway: varying shades of cool grey keycaps, a dark gunmetal aluminum chassis, and minimalist black legends. Studio lighting, pure black background, brutalist architectural aesthetic.",
+            'white': "A top-down, flat-lay orthographic view of the Obsidian // 75 mechanical keyboard. The keyboard currently features the 'Chalk White' colorway: completely opaque, pure chalk white keycaps, a white electrophoretic-coated chassis, and sharp black legends. Studio lighting, pure black background, stark high-contrast look.",
+            'blue': "A top-down, flat-lay orthographic view of the Obsidian // 75 mechanical keyboard. The keyboard currently features the 'Cyber Blue' colorway: deep navy blue keycaps with vibrant cyan accents, a dark slate chassis, and glowing cyan legends. Studio lighting, pure black background, tech-noir hacker aesthetic."
+        };
+
+        configBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Reset active states
+                configBtns.forEach(b => {
+                    b.classList.remove('text-secondary-container', 'border-secondary-container');
+                    b.classList.add('text-on-surface', 'border-[#2A2A2E]');
+                });
+                
+                // Set active state
+                btn.classList.add('text-secondary-container', 'border-secondary-container');
+                btn.classList.remove('text-on-surface', 'border-[#2A2A2E]');
+                
+                // Update Image Prompt/Alt (Simulating image change)
+                const color = btn.getAttribute('data-color');
+                configImg.style.opacity = 0;
+                
+                setTimeout(() => {
+                    // In a real scenario, the src would change here.
+                    // For the placeholder system, we update the data-alt to reflect the intent.
+                    configImg.setAttribute('data-alt', configPrompts[color]);
+                    configImg.style.opacity = 1;
+                }, 300);
+            });
+        });
+
+    </script>
+</body></html>
