@@ -22,6 +22,13 @@
     rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&display=swap"
     rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -94,12 +101,12 @@
             "gutter": "24px"
           },
           fontFamily: {
-            "body-md": ["JetBrains Mono"],
-            "spec-code": ["JetBrains Mono"],
-            "headline-lg": ["Playfair Display"],
-            "display-xl": ["Playfair Display"],
-            "headline-lg-mobile": ["Playfair Display"],
-            "label-sm": ["JetBrains Mono"]
+            "body-md": ["Geist", "sans-serif"],
+            "headline-lg": ["Geist", "sans-serif"],
+            "display-xl": ["Geist", "sans-serif"],
+            "headline-lg-mobile": ["Geist", "sans-serif"],
+            "spec-code": ["Geist Mono", "monospace"],
+            "label-sm": ["Geist Mono", "monospace"]
           },
           fontSize: {
             "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }],
@@ -147,9 +154,9 @@
       <!-- Premium Editorial Logo -->
       <a href="#"
         class="font-headline-lg-mobile text-[1.4rem] md:text-[1.6rem] italic font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/70 transition-all duration-300 hover:tracking-normal cursor-hover-target"
-        style="font-family: 'Cormorant Garamond', serif;">
+        style="font-family: 'Geist', serif;">
         EPOMAKER <span
-          class="font-light text-[1rem] md:text-[1.1rem] not-italic tracking-widest text-[#00F0FF]/80 mx-1">//</span>
+          class="font-light text-[1rem] md:text-[1.1rem] not-italic tracking-widest text-[#43464c]/20 mx-1 ">//</span>
         GALAXY65
       </a>
 
@@ -164,6 +171,8 @@
           href="#acoustics">Acoustics</a>
         <a class="nav-link text-[#8e9192] hover:text-white transition-colors duration-300 relative py-1 cursor-hover-target"
           href="#configurator">Configurator</a>
+        <a href="#specifications"
+          class="nav-link text-[#8e9192] hover:text-white transition-colors duration-300 relative py-1 cursor-hover-target">Specifications</a>
       </div>
 
       <!-- Actions & Micro-Interactions -->
@@ -180,16 +189,16 @@
           data-icon="shopping_cart">
           shopping_cart
           <span
-            class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#00F0FF] rounded-full shadow-[0_0_8px_#00F0FF]"></span>
+            class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#ffffff] rounded-full shadow-[0_0_8px_#ffffff]"></span>
         </button>
 
         <!-- Premium Responsive Hamburger (Mobile Only) -->
-        <button
-          class="md:hidden flex flex-col justify-center items-center w-8 h-8 rounded-full border border-white/10 hover:border-white/30 transition-all duration-300 relative cursor-hover-target"
-          id="mobile-menu-toggle"
-          onclick="document.getElementById('terminal-drawer').classList.remove('translate-x-full')">
-          <span class="w-4 h-[1.5px] bg-white mb-1 transition-all"></span>
-          <span class="w-4 h-[1.5px] bg-white transition-all"></span>
+        <!-- Premium Responsive Hamburger (Mobile Only) -->
+        <!-- Premium Responsive Hamburger (Mobile Only) -->
+        <button id="mobile-menu-open" class="md:hidden p-2 text-white focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
         </button>
       </div>
 
@@ -225,17 +234,19 @@
     <!-- BENTO FEATURES -->
     <section id="architecture" class="py-24 px-margin-mobile md:px-margin-desktop bg-[#050505]">
       <div class="flex justify-between items-end mb-12 border-b border-[#2A2A2E] pb-4">
-        <h2 class="font-headline-lg text-headline-lg italic text-on-surface"
-          style="font-family: 'Playfair Display', serif;">SYSTEM ARCHITECTURE</h2>
+        <h2 class="font-headline-lg text-headline-lg italic text-on-surface tracking-normal"
+          style="font-family: 'Geist', serif;">SYSTEM ARCHITECTURE</h2>
         <span class="font-spec-code text-spec-code text-outline hidden md:block">[ DIAGNOSTICS_RUNNING ]</span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[240px]">
         <!-- Card 1 -->
         <div
-          class="obsidian-card md:col-span-2 md:row-span-2 p-6 flex flex-col justify-end relative cursor-hover-target group"
+          class="obsidian-card md:col-span-2 md:row-span-2 p-6 flex flex-col justify-between relative cursor-hover-target group"
           style="background-image: url('/images/bento_chassis_1784128898072.png'); background-size: cover; background-position: center;">
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-          <span class="relative z-10 material-symbols-outlined text-outline">tune</span>
+
+          <span class="relative z-10 material-symbols-outlined text-outline text-3xl">precision_manufacturing</span>
+
           <div class="relative z-10">
             <span class="font-spec-code text-spec-code text-outline mb-2 block">01 // CHASSIS</span>
             <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white leading-tight">Anodized CNC Aluminum
@@ -263,9 +274,12 @@
         </div>
         <!-- Card 4 -->
         <div
-          class="obsidian-card md:col-span-2 md:row-span-2 p-6 flex flex-col justify-end relative cursor-hover-target group"
+          class="obsidian-card md:col-span-2 md:row-span-2 p-6 flex flex-col justify-between relative cursor-hover-target group"
           style="background-image: url('/images/keybaord 3.jpg'); background-size: cover; background-position: center;">
           <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
+
+          <span class="relative z-10 material-symbols-outlined text-[#393941] text-3xl">layers</span>
+
           <div class="relative z-10">
             <span class="font-spec-code text-spec-code text-outline mb-2 block">04 // CHASSIS</span>
             <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white leading-tight">Anodized CNC Aluminum
@@ -273,9 +287,12 @@
           </div>
         </div>
         <!-- Card 5 -->
-        <div class="obsidian-card md:col-span-2 p-6 flex flex-col justify-end relative cursor-hover-target"
+        <div class="obsidian-card md:col-span-2 p-6 flex flex-col justify-between relative cursor-hover-target"
           style="background-image: url('/images/keybaord pic.jpg'); background-size: cover; background-position: center;">
           <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+
+          <span class="relative z-10 material-symbols-outlined text-outline text-3xl">ac_unit</span>
+
           <div class="relative z-10 w-1/2">
             <span class="font-spec-code text-spec-code text-outline mb-2 block">05 // INTERFACE</span>
             <h4 class="font-body-md text-white font-bold uppercase text-lg">Signature Ice Keycaps</h4>
@@ -317,80 +334,84 @@
     </div>
 
     <!-- CRAFT YOUR CLICK (Acoustics) -->
-    <section id="acoustics" class="py-24 px-margin-mobile md:px-margin-desktop bg-surface">
-      <div class="text-center mb-16">
-        <h2 class="font-headline-lg text-headline-lg italic text-on-surface mb-4"
-          style="font-family: 'Playfair Display', serif;">CRAFT YOUR CLICK</h2>
-        <p class="font-spec-code text-spec-code text-outline">SELECT SWITCH TYPE TO AUDIT SOUND PROFILE</p>
+    <section class="py-24 max-w-[1200px] mx-auto px-6" id="acoustics">
+      <div class="flex justify-between items-end mb-8">
+        <h2 class="text-white text-5xl font-semibold font-black uppercase italic tracking-normal"
+          style="font-family: 'Geist', sans-serif;">Craft Your Click</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
-        <!-- ICE TACTILE -->
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
         <button
-          class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn"
-          data-sound="clack">
-          <div class="acoustic-bg-text">ICE</div>
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card"
-              style="background-image: url('/images/switch_ice_1784128932832.png'); background-size: cover;">
-              <div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
-            </div>
+          class="switch-card group relative w-full h-[320px] rounded-2xl bg-[#0a0a0c] border border-white/5 overflow-hidden flex flex-col justify-end p-6 transition-colors hover:border-white/10"
+          data-sound="blue">
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <span class="switch-bg-text text-[#1a1a1f] group-active:text-[#0070f3] group-active:scale-110">BLUE</span>
+          </div>
+
+          <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 transition-all duration-300 ease-out group-hover:-translate-y-3 group-active:translate-y-6 group-active:scale-90">
+            <img src="/images/blue switch.png" alt="Blue Switch" class="w-3/5 object-contain drop-shadow-2xl">
+          </div>
+
+          <div class="relative z-20 w-full flex items-center justify-between text-white">
+            <h3 class="text-2xl font-black italic tracking-wide">BLUE MAX</h3>
             <span
-              class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">ICE
-              TACTILE <span
-                class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+              class="material-symbols-outlined text-3xl opacity-50 group-hover:opacity-100 transition-opacity">volume_up</span>
           </div>
         </button>
-        <!-- GLIDE LINEAR -->
+
         <button
-          class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn"
-          data-sound="thock">
-          <div class="acoustic-bg-text">GLIDE</div>
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card"
-              style="background-image: url('/images/switch_glide_1784128945291.png'); background-size: cover;">
-              <div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
-            </div>
+          class="switch-card group relative w-full h-[320px] rounded-2xl bg-[#0a0a0c] border border-white/5 overflow-hidden flex flex-col justify-end p-6 transition-colors hover:border-white/10"
+          data-sound="red">
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <span class="switch-bg-text text-[#1a1a1f] group-active:text-[#ff0000] group-active:scale-110">RED</span>
+          </div>
+          <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 transition-all duration-300 ease-out group-hover:-translate-y-3 group-active:translate-y-6 group-active:scale-90">
+            <img src="/images/red switch.png" alt="Red Switch" class="w-3/5 object-contain drop-shadow-2xl">
+          </div>
+          <div class="relative z-20 w-full flex items-center justify-between text-white">
+            <h3 class="text-2xl font-black italic tracking-wide">RED MAX</h3>
             <span
-              class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">GLIDE
-              LINEAR <span
-                class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+              class="material-symbols-outlined text-3xl opacity-50 group-hover:opacity-100 transition-opacity">volume_up</span>
           </div>
         </button>
-        <!-- SLATE SILENT -->
+
         <button
-          class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn"
-          data-sound="pop">
-          <div class="acoustic-bg-text">MUTE</div>
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card"
-              style="background-image: url('/images/switch_slate_1784128958046.png'); background-size: cover;">
-              <div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
-            </div>
+          class="switch-card group relative w-full h-[320px] rounded-2xl bg-[#0a0a0c] border border-white/5 overflow-hidden flex flex-col justify-end p-6 transition-colors hover:border-white/10"
+          data-sound="brown">
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <span class="switch-bg-text text-[#1a1a1f] group-active:text-[#8b4513] group-active:scale-110">BROWN</span>
+          </div>
+          <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 transition-all duration-300 ease-out group-hover:-translate-y-3 group-active:translate-y-6 group-active:scale-90">
+            <img src="/images/brown switch.png" alt="Brown Switch" class="w-3/5 object-contain drop-shadow-2xl">
+          </div>
+          <div class="relative z-20 w-full flex items-center justify-between text-white">
+            <h3 class="text-2xl font-black italic tracking-wide">BROWN MAX</h3>
             <span
-              class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">SLATE
-              SILENT <span
-                class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+              class="material-symbols-outlined text-3xl opacity-50 group-hover:opacity-100 transition-opacity">volume_up</span>
           </div>
         </button>
-        <!-- HEAVY CLICK -->
+
         <button
-          class="obsidian-card h-[300px] flex items-center justify-center cursor-hover-target group switch-audio-btn"
-          data-sound="click">
-          <div class="acoustic-bg-text">HEAVY</div>
-          <div class="relative z-10 flex flex-col items-center">
-            <div
-              class="w-24 h-24 mb-6 border border-[#2A2A2E] bg-surface-container-low flex items-center justify-center group-hover:border-[#00F0FF] transition-colors relative tilt-card"
-              style="background-image: url('/images/switch_ice_1784128932832.png'); background-size: cover; filter: hue-rotate(120deg) brightness(0.9);">
-              <div class="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-all"></div>
-            </div>
+          class="switch-card group relative w-full h-[320px] rounded-2xl bg-[#0a0a0c] border border-white/5 overflow-hidden flex flex-col justify-end p-6 transition-colors hover:border-white/10"
+          data-sound="black">
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <span class="switch-bg-text text-[#1a1a1f] group-active:text-[#555555] group-active:scale-110">BLACK</span>
+          </div>
+          <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none z-10 transition-all duration-300 ease-out group-hover:-translate-y-3 group-active:translate-y-6 group-active:scale-90">
+            <img src="/images/black switch.png" alt="Black Switch" class="w-3/5 object-contain drop-shadow-2xl">
+          </div>
+          <div class="relative z-20 w-full flex items-center justify-between text-white">
+            <h3 class="text-2xl font-black italic tracking-wide">BLACK MAX</h3>
             <span
-              class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest flex items-center gap-2">HEAVY
-              CLICK <span class="material-symbols-outlined text-[16px] text-secondary-container">volume_up</span></span>
+              class="material-symbols-outlined text-3xl opacity-50 group-hover:opacity-100 transition-opacity">volume_up</span>
           </div>
         </button>
+
       </div>
     </section>
 
@@ -430,8 +451,8 @@
     <section id="configurator"
       class="py-24 px-margin-mobile md:px-margin-desktop bg-[#050505] min-h-screen flex flex-col">
       <div class="mb-12 flex justify-between items-end border-b border-[#2A2A2E] pb-4">
-        <h2 class="font-headline-lg text-headline-lg italic text-on-surface"
-          style="font-family: 'Playfair Display', serif;">VISUAL MATRIX</h2>
+        <h2 class="font-headline-lg text-headline-lg italic text-on-surface tracking-normal"
+          style="font-family: 'Geist', serif;">VISUAL MATRIX</h2>
         <span class="font-spec-code text-spec-code text-outline hidden md:block">[ AESTHETIC_OVERRIDE_ENABLED ]</span>
       </div>
       <div class="flex-1 flex flex-col relative">
@@ -446,23 +467,20 @@
             id="configurator-img" src="/frames/ezgif-frame-219.jpg" />
         </div>
         <!-- Selector Bar -->
+        <!-- Selector Bar -->
         <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
-          <span class="font-spec-code text-spec-code text-outline mr-4">COLOR_SCHEME:</span>
+          <span class="font-spec-code text-spec-code text-outline mr-4 tracking-normal"
+            style="font-family: Geist, sans-serif;">COLOR SCHEME:</span>
           <div class="flex flex-wrap gap-2 justify-center">
-            <button
-              class="config-btn active px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-secondary-container border-secondary-container"
+            <button class="config-btn active px-4 py-2 font-label-sm text-label-sm uppercase cursor-hover-target"
               data-color="dark">Obsidian Dark</button>
-            <button
-              class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]"
+            <button class="config-btn px-4 py-2 font-label-sm text-label-sm uppercase cursor-hover-target"
               data-color="frost">Glacier Frost</button>
-            <button
-              class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]"
+            <button class="config-btn px-4 py-2 font-label-sm text-label-sm uppercase cursor-hover-target"
               data-color="slate">Nordic Slate</button>
-            <button
-              class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]"
+            <button class="config-btn px-4 py-2 font-label-sm text-label-sm uppercase cursor-hover-target"
               data-color="white">Chalk White</button>
-            <button
-              class="config-btn px-4 py-2 border glow-border font-label-sm text-label-sm uppercase bg-surface text-on-surface border-[#2A2A2E]"
+            <button class="config-btn px-4 py-2 font-label-sm text-label-sm uppercase cursor-hover-target"
               data-color="blue">Cyber Blue</button>
           </div>
         </div>
@@ -470,104 +488,201 @@
     </section>
 
     <!-- SYSTEM SPECIFICATIONS -->
-    <section id="specifications"
-      class="py-24 px-margin-mobile md:px-margin-desktop bg-[#050505] border-t border-[#2A2A2E]">
-      <div class="flex justify-between items-end mb-12 border-b border-[#2A2A2E] pb-4">
-        <h2 class="font-headline-lg text-headline-lg italic text-on-surface"
-          style="font-family: 'Playfair Display', serif;">SYSTEM SPECIFICATIONS</h2>
-        <span class="font-spec-code text-spec-code text-outline hidden md:block">[ HARDWARE_SPEC_MATRIX ]</span>
+    <section id="specifications" class="relative w-full max-w-6xl mx-auto py-24 px-6 bg-black text-white">
+
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-neutral-800 pb-6 mb-12">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-semibold tracking-normal mt-2 uppercase italic"
+            style="font-family: Geist;">
+            System Specifications
+          </h2>
+        </div>
+        <div class="text-neutral-500 text-xs mt-4 md:mt-0 tracking-wider font-spec-code text-spec-code text-outline">
+          [ GALAXY65 // HARDWARE MATRIX V1.0 ]
+        </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        <div
-          class="border border-[#2A2A2E] p-6 bg-surface-container-low hover:border-[#5f6262] transition-colors duration-300">
-          <span class="font-spec-code text-spec-code text-[#00F0FF] mb-4 block">// STRUCTURAL PLATFORM</span>
-          <table class="w-full text-left font-body-md text-on-surface opacity-80">
-            <tbody>
-              <tr class="border-b border-[#2A2A2E]/50">
-                <td class="py-3 font-bold">Form Factor</td>
-                <td class="py-3">65% Layout (67 structural elements)</td>
-              </tr>
-              <tr class="border-b border-[#2A2A2E]/50">
-                <td class="py-3 font-bold">Chassis Type</td>
-                <td class="py-3">Anodized CNC Milled Aluminum</td>
-              </tr>
-              <tr class="border-b border-[#2A2A2E]/50">
-                <td class="py-3 font-bold">Mount Topology</td>
-                <td class="py-3">Silicon Suspending Gasket Mount</td>
-              </tr>
-              <tr>
-                <td class="py-3 font-bold">Hot-Swappable</td>
-                <td class="py-3">Yes (Fully Supports 3-pin / 5-pin mechanical engines)</td>
-              </tr>
-            </tbody>
-          </table>
+
+      <!-- Tech Grid Matrix -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0 items-stretch">
+
+        <!-- LEFT COLUMN: CORE LAYOUT & CHASSIS -->
+        <div class="flex flex-col justify-between border-b border-neutral-900 md:border-b-0 md:pb-0 pb-8">
+          <div class="text-xs font-mono text-neutral-500 mb-6 uppercase tracking-widest">// Platform Mechanics</div>
+
+          <div class="space-y-6">
+            <!-- Row 1 -->
+            <div
+              class="flex justify-between items-start border-b border-neutral-900 pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Form Factor</span>
+              <span class="text-right text-sm font-medium tracking-wide text-white">65% Layout <span
+                  class="text-neutral-500 text-xs font-mono ml-1">(67 Elements)</span></span>
+            </div>
+
+            <!-- Row 2 -->
+            <div
+              class="flex justify-between items-start border-b border-neutral-900 pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Chassis Type</span>
+              <span class="text-right text-sm font-medium tracking-wide text-white">Anodized CNC Milled Aluminum</span>
+            </div>
+
+            <!-- Row 3 -->
+            <div
+              class="flex justify-between items-start border-b border-neutral-900 pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Mount Topology</span>
+              <span class="text-right text-sm font-medium tracking-wide text-cyan-400">Silicon Suspending Gasket</span>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="flex justify-between items-start pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Hot-Swappable</span>
+              <span class="text-right text-sm font-medium tracking-wide text-white">Yes <span
+                  class="text-neutral-500 text-xs font-mono ml-1">(3-pin / 5-pin Engines)</span></span>
+            </div>
+          </div>
         </div>
-        <div
-          class="border border-[#2A2A2E] p-6 bg-surface-container-low hover:border-[#5f6262] transition-colors duration-300">
-          <span class="font-spec-code text-spec-code text-[#00F0FF] mb-4 block">// FREQUENCY & LOGISTICS</span>
-          <table class="w-full text-left font-body-md text-on-surface opacity-80">
-            <tbody>
-              <tr class="border-b border-[#2A2A2E]/50">
-                <td class="py-3 font-bold">Bus Protocol</td>
-                <td class="py-3">USB-C Wired / 2.4Ghz RF / Bluetooth 5.0</td>
-              </tr>
-              <tr class="border-b border-[#2A2A2E]/50">
-                <td class="py-3 font-bold">Dampening Foam</td>
-                <td class="py-3">IXPE Switch Pad, Poron Foam, Acoustic PET layer</td>
-              </tr>
-              <tr class="border-b border-[#2A2A2E]/50">
-                <td class="py-3 font-bold">Battery Node</td>
-                <td class="py-3">4000mAh High Capacity Internal Cell</td>
-              </tr>
-              <tr>
-                <td class="py-3 font-bold">Platform Sync</td>
-                <td class="py-3">Windows / macOS / Linux / iOS / Android</td>
-              </tr>
-            </tbody>
-          </table>
+
+        <!-- RIGHT COLUMN: CONNECTIVITY & ACOUSTICS -->
+        <div class="flex flex-col justify-between md:border-l md:border-neutral-900 md:pl-16 pt-8 md:pt-0">
+          <div class="text-xs font-mono text-neutral-500 mb-6 uppercase tracking-widest">// Frequency & Data Protocols
+          </div>
+
+          <div class="space-y-6">
+            <!-- Row 1 -->
+            <div
+              class="flex justify-between items-start border-b border-neutral-900 pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Bus Protocol</span>
+              <span class="text-right text-sm font-medium tracking-wide text-white">Wired USB-C / 2.4GHz RF / BT
+                5.0</span>
+            </div>
+
+            <!-- Row 2 -->
+            <div
+              class="flex justify-between items-start border-b border-neutral-900 pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Dampening Layer</span>
+              <span class="text-right text-sm font-medium tracking-wide text-neutral-300 max-w-[240px]">
+                IXPE Switch Pad, Poron Foam, Acoustic PET Layer
+              </span>
+            </div>
+
+            <!-- Row 3 -->
+            <div
+              class="flex justify-between items-start border-b border-neutral-900 pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Battery Node</span>
+              <span class="text-right text-sm font-medium tracking-wide text-white">4000mAh High Capacity Cell</span>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="flex justify-between items-start pb-4 group hover:border-neutral-800 transition-colors">
+              <span class="font-mono text-sm text-neutral-400">Platform Sync</span>
+              <span class="text-right text-sm font-mono text-xs tracking-wider text-neutral-400">
+                Win / macOS / Linux / iOS / Android
+              </span>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
     <!-- CTA SECTION -->
     <section
-      class="py-32 bg-surface border-t border-[#2A2A2E] flex flex-col items-center justify-center relative overflow-hidden">
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary-container/5 rounded-full blur-[100px] pointer-events-none">
-      </div>
-      <span
-        class="font-spec-code text-spec-code text-secondary-container mb-6 block tracking-widest uppercase">Experience
-        Peak Performance</span>
-      <button
-        class="group relative px-12 py-6 bg-transparent overflow-hidden cursor-hover-target border border-[#2A2A2E] rounded-none">
-        <div
-          class="absolute inset-0 bg-gradient-to-r from-secondary-container/20 to-transparent translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-        </div>
-        <span
-          class="relative z-10 font-headline-lg-mobile text-headline-lg-mobile italic font-bold text-on-surface group-hover:text-secondary-container transition-colors tracking-tighter flex items-center gap-4"
-          style="font-family: 'Playfair Display', serif;">
-          RESERVE GALAXY65 <span class="material-symbols-outlined text-4xl">chevron_right</span>
+      class="relative w-full py-32 bg-black overflow-hidden flex flex-col items-center justify-center border-t border-neutral-800">
+
+      <!-- Subtle Cyan Radial Glow Spotlight behind the button -->
+      <div class="absolute w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+      <!-- Content Container -->
+      <div class="relative z-10 flex flex-col items-center text-center px-6">
+        <!-- Sub-tag -->
+        <span class="text-xs font-mono tracking-[0.25em] text-neutral-500 uppercase mb-4 animate-pulse">
+          // Experience Peak Performance
         </span>
-      </button>
+
+        <!-- Premium Interactive Call To Action Button -->
+        <a href="#reserve"
+          class="group relative flex items-center justify-center px-12 py-6 border border-neutral-800 bg-neutral-950/40 backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:bg-black overflow-hidden max-w-xl">
+          <!-- Hover corner accents -->
+          <div
+            class="absolute top-0 left-0 w-2 h-[1px] bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">
+          </div>
+          <div
+            class="absolute top-0 left-0 w-[1px] h-2 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">
+          </div>
+
+          <!-- Button Text -->
+          <span
+            class="text-3xl md:text-4xl font-serif italic font-medium tracking-wide text-white group-hover:text-cyan-400 transition-colors flex items-center gap-4">
+            Reserve Galaxy65
+            <span
+              class="inline-block transform font-sans text-2xl transition-transform duration-300 group-hover:translate-x-2">→</span>
+          </span>
+        </a>
+
+        <!-- System Build Indicator -->
+        <span class="mt-4 font-mono text-[10.5px] text-neutral-600 tracking-widest uppercase">
+          [ Batch_01 // Allocation Open ]
+        </span>
+      </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer
-    class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center justify-center py-12 px-margin-desktop gap-8"
-    data-component="Footer">
-    <div class="font-headline-lg text-headline-lg italic text-primary font-bold tracking-tighter">EPOMAKER // GALAXY65
-    </div>
-    <div class="flex flex-wrap gap-8 font-spec-code text-spec-code text-outline">
-      <a class="hover:text-primary underline opacity-80 hover:opacity-100 transition-opacity cursor-hover-target"
-        href="#">Privacy Protocol</a>
-      <a class="hover:text-primary underline opacity-80 hover:opacity-100 transition-opacity cursor-hover-target"
-        href="#">Terms of Deployment</a>
-      <a class="hover:text-primary underline opacity-80 hover:opacity-100 transition-opacity cursor-hover-target"
-        href="#">Technical Support</a>
-    </div>
-    <div class="font-spec-code text-spec-code text-outline opacity-60">
-      © 2026 EPOMAKER INDUSTRIES. ALL RIGHTS RESERVED.
+  <footer class="w-full bg-black border-t border-neutral-800 pt-16 pb-12 px-6 md:px-12 text-neutral-400">
+    <div class="max-w-6xl mx-auto flex flex-col gap-12">
+
+      <!-- Top Row: Technical Links & Meta Matrix -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-12 border-b border-neutral-950 items-start">
+
+        <!-- Col 1: Core Navigation Protocols -->
+        <div class="flex flex-col gap-2">
+          <span class="font-mono text-[11.5px] text-neutral-600 uppercase tracking-widest">// System Legalities</span>
+          <div class="flex flex-col gap-1">
+            <a href="#footer" class="text-xs font-mono hover:text-white transition-colors w-fit">[ Privacy Protocol
+              ]</a>
+            <a href="#footer" class="text-xs font-mono hover:text-white transition-colors w-fit">[ Terms of Deployment
+              ]</a>
+          </div>
+        </div>
+
+        <!-- Col 2: Engineering & Help -->
+        <div class="flex flex-col gap-2">
+          <span class="font-mono text-[11.5px] text-neutral-600 uppercase tracking-widest">// Infrastructure</span>
+          <div class="flex flex-col gap-1">
+            <a href="#footer" class="text-xs font-mono hover:text-white transition-colors w-fit">[ Technical Support
+              ]</a>
+            <a href="#footer" class="text-xs font-mono hover:text-white transition-colors w-fit">[ Firmware Engine
+              Updates
+              ]</a>
+          </div>
+        </div>
+
+        <!-- Col 3: Hardware Diagnostics Status -->
+        <div class="flex flex-col gap-1 md:text-right font-mono text-[11px] text-neutral-500">
+          <div>SERVER_STATUS // <span class="text-emerald-500">OPERATIONAL</span></div>
+          <div>FIRMWARE // V1.0.4 // BLE_STABLE</div>
+          <div>LOC // PAKISTAN</div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Huge Monolithic Wordmark & Copyright -->
+      <div class="flex flex-col gap-6">
+        <!-- Monolithic Huge Text Styling -->
+        <div class="w-full text-center select-none overflow-hidden">
+          <h1
+            class="text-[9vw] md:text-[8vw] font-black tracking-tighter uppercase italic text-neutral-900 leading-none select-none pointer-events-none font-sans">
+            EPOMAKER // GALAXY65
+          </h1>
+        </div>
+
+        <!-- Tiny System Copyright Meta -->
+        <div
+          class="flex flex-col sm:flex-row justify-between items-center font-mono text-[10.5px] text-neutral-600 uppercase tracking-widest gap-2">
+          <div>© 2026 EPOMAKER INDUSTRIES. ALL RIGHTS RESERVED.</div>
+          <div>DESIGNED // DEPLOYED BY SHAYAN GABA</div>
+        </div>
+      </div>
+
     </div>
   </footer>
 
@@ -575,11 +690,11 @@
   <div id="terminal-drawer"
     class="md:hidden fixed top-0 right-0 h-full w-[320px] sm:w-[380px] z-50 bg-[#050505]/95 backdrop-blur-2xl border-l border-white/[0.06] transform translate-x-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-8 shadow-[-20px_0_50px_rgba(0,0,0,0.95)]">
 
-    <div class="flex justify-end mb-4">
-      <button
-        class="text-white/40 hover:text-white/90 transition-all duration-300 hover:rotate-90 p-2 cursor-hover-target"
-        onclick="document.getElementById('terminal-drawer').classList.add('translate-x-full')">
-        <span class="material-symbols-outlined text-[24px]">close</span>
+    <div class="flex justify-end p-6">
+      <button id="mobile-menu-close" class="p-2 text-white hover:text-cyan-400 transition-colors focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
       </button>
     </div>
 

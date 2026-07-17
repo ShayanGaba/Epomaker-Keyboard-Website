@@ -226,12 +226,23 @@ body {
 }
 
 /* Interactive custom hamburger animation styling */
-#mobile-menu-toggle:hover span:first-child {
+/* #mobile-menu-toggle:hover span:first-child {
   transform: translateY(-1px);
 }
 
 #mobile-menu-toggle:hover span:last-child {
   transform: translateY(1px);
+} */
+
+/* Smoothly translate the drawer in from the right edge */
+#mobile-nav-overlay {
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* FIXED: Toggle selector to open state */
+#mobile-nav-overlay.is-open {
+  transform: translateX(0) !important;
 }
 
 /* Epomaker Galaxy65 Title Overlay */
@@ -751,7 +762,7 @@ body {
 }
 
 .marquee-item {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Geist Mono', serif;
   font-size: 24px;
   font-style: italic;
   font-weight: 700;
@@ -789,6 +800,97 @@ body {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
 }
+
+/* ==========================================================================
+   PREMIUM DYNAMIC CONFIGURATOR MATRIX
+   ========================================================================== */
+.config-btn {
+  position: relative;
+  background: #0a0a0c !important;
+  border: 1px solid #2A2A2E !important;
+  color: #8e9192 !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* --- OBSIDIAN DARK BRANDING --- */
+.config-btn[data-color="dark"]:hover,
+.config-btn[data-color="dark"].active {
+  color: #566161 !important;
+  border-color: #566161 !important;
+  box-shadow: 0 0 20px rgba(0, 238, 252, 0.2), inset 0 0 10px rgba(0, 238, 252, 0.05) !important;
+}
+
+/* --- GLACIER FROST BRANDING --- */
+.config-btn[data-color="frost"]:hover,
+.config-btn[data-color="frost"].active {
+  color: #a5f3fc !important;
+  border-color: #a5f3fc !important;
+  box-shadow: 0 0 20px rgba(165, 243, 252, 0.25), inset 0 0 10px rgba(165, 243, 252, 0.05) !important;
+}
+
+/* --- NORDIC SLATE BRANDING --- */
+.config-btn[data-color="slate"]:hover,
+.config-btn[data-color="slate"].active {
+  color: #cbd5e1 !important;
+  border-color: #64748b !important;
+  box-shadow: 0 0 20px rgba(100, 116, 139, 0.2), inset 0 0 10px rgba(100, 116, 139, 0.05) !important;
+}
+
+/* --- CHALK WHITE BRANDING --- */
+.config-btn[data-color="white"]:hover,
+.config-btn[data-color="white"].active {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* --- CYBER BLUE BRANDING --- */
+.config-btn[data-color="blue"]:hover,
+.config-btn[data-color="blue"].active {
+  color: #3b82f6 !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), inset 0 0 10px rgba(59, 130, 246, 0.05) !important;
+}
+
+/* SWITCH CONFIGURATOR STYLES */
+/* --- OPTION 1: THE SOCKET PLUNGE ILLUSION --- */
+
+/* The card frame and text stay perfectly stationary */
+.switch-card {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+  transform: none !important; /* Prevents the card itself from moving */
+}
+
+/* Only the switch image plunges down */
+.switch-card .switch-img-wrapper {
+  transition: transform 0.16s cubic-bezier(0.175, 0.885, 0.32, 1.25) !important;
+  will-change: transform;
+}
+
+/* On click, the image dives down and scales down slightly */
+.switch-card.active-press .switch-img-wrapper {
+  transform: translateY(12px) scale(0.93) !important;
+  transition: transform 0.03s cubic-bezier(0.075, 0.82, 0.165, 1) !important; /* Instant snap down */
+}
+
+.switch-bg-text {
+  font-family: 'Geist', 'Space Grotesk', sans-serif;
+  font-size: 10rem; /* Massive text */
+  font-weight: 900; /* Extra Black */
+  letter-spacing: -0.05em; /* Tightly packed letters */
+  line-height: 1;
+  text-transform: uppercase;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* On mobile, shrink the massive text slightly so it fits */
+@media (max-width: 768px) {
+  .switch-bg-text {
+    font-size: 6rem;
+  }
+}
+
+
 
 /* Glow effects */
 .glow-border {
