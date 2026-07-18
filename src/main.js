@@ -461,7 +461,7 @@ function initMobileNavigation() {
   openBtn.addEventListener("click", openMenu);
   closeBtn.addEventListener("click", closeMenu);
 
-  drawerLinks.forEach(link => {
+  drawerLinks.forEach((link) => {
     link.addEventListener("click", closeMenu);
   });
 }
@@ -651,42 +651,8 @@ function initCinematicScrollAndSpy() {
 }
 
 // --- MOBILE ACCESS TERMINAL INTERACTION ENGINE ---
-function initMobileMenuController() {
-  const drawer = document.getElementById("terminal-drawer");
-  const toggleBtn = document.getElementById("mobile-menu-toggle");
-  const closeBtn = document.getElementById("mobile-menu-close");
-  const drawerLinks = document.querySelectorAll(".drawer-link");
-  const buildBtn = drawer?.querySelector("button");
 
-  if (!drawer) return;
 
-  const openDrawer = () => {
-    drawer.classList.remove("translate-x-full");
-  };
-
-  const closeDrawer = () => {
-    drawer.classList.add("translate-x-full");
-  };
-
-  // Modern event listeners for snappy mobile response
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", openDrawer);
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeDrawer);
-  }
-
-  // Auto-collapse menu when user clicks any anchor links inside
-  drawerLinks.forEach((link) => {
-    link.addEventListener("click", closeDrawer);
-  });
-
-  // Close when clicking the bottom "BUILD YOUR OWN" action button
-  if (buildBtn) {
-    buildBtn.addEventListener("click", closeDrawer);
-  }
-}
 
 // ==========================================
 // UNIFIED ZERO-LATENCY, CLIP-FREE AUDIO ENGINE

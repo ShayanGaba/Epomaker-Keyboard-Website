@@ -35,19 +35,22 @@ body.is-scrolling main > div {
 }
 
 /* Ensure the desktop navigation & mobile drawer don't blur or scale during scroll */
-#terminal-drawer,
 nav, 
 .navbar {
   filter: none !important;
   transform: none !important;
 }
 
+#terminal-drawer {
+  filter: none !important;
+}
+#5f6262
 :root {
   --bg-color: #050505;
   /* Deep Obsidian Black to match code.html */
   --text-color: #e2e2e4;
   --text-muted: #8e9192;
-  --accent-color: #5f6262;
+  --accent-color: #7b8080;
   /* Modern Cyber Cyan */
   --accent-glow: rgba(0, 240, 255, 0.4);
   --glass-bg: rgba(26, 26, 30, 0.8);
