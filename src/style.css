@@ -11,17 +11,18 @@
 
 /* Prevent default rigid instant snap */
 html {
-  scroll-behavior: auto !important; /* Managed dynamically via JS for custom easing */
+  scroll-behavior: auto !important;
+  /* Managed dynamically via JS for custom easing */
 }
 
 /* Base styling for page sections to support cinematic scaling & blurring */
-section, 
-.bento-section, 
+section,
+.bento-section,
 header,
-main > div {
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+main>div {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, filter, opacity;
 }
 
@@ -29,13 +30,15 @@ main > div {
 body.is-scrolling section,
 body.is-scrolling .bento-section,
 body.is-scrolling header,
-body.is-scrolling main > div {
-  filter: blur(3px) brightness(0.35); /* Elegant motion blur and dimming */
-  transform: scale(0.97); /* Subtle pull-back/depth effect */
+body.is-scrolling main>div {
+  filter: blur(3px) brightness(0.35);
+  /* Elegant motion blur and dimming */
+  transform: scale(0.97);
+  /* Subtle pull-back/depth effect */
 }
 
 /* Ensure the desktop navigation & mobile drawer don't blur or scale during scroll */
-nav, 
+nav,
 .navbar {
   filter: none !important;
   transform: none !important;
@@ -44,7 +47,7 @@ nav,
 #terminal-drawer {
   filter: none !important;
 }
-#5f6262
+
 :root {
   --bg-color: #050505;
   /* Deep Obsidian Black to match code.html */
@@ -66,73 +69,210 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Loader Screen Overlay */
+/* ==========================================================================
+   PREMIUM BOOT-SEQUENCE LOADER (1–3s guaranteed)
+   ========================================================================== */
 .loader-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg-color);
+  inset: 0;
+  background-color: #050505;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
-  opacity: 1;
-  visibility: visible;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.1s cubic-bezier(0.83, 0, 0.17, 1) 0.15s;
 }
 
-.loader-overlay.fade-out {
-  opacity: 0;
+/* Curtain-lift exit */
+.loader-overlay.loader-exit {
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+}
+
+.loader-overlay.loader-hidden {
   visibility: hidden;
 }
 
-.loader-content {
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
+/* Faint engineering grid backdrop (matches the configurator section) */
+.loader-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image:
+    linear-gradient(#444748 1px, transparent 1px),
+    linear-gradient(90deg, #444748 1px, transparent 1px);
+  background-size: clamp(28px, 5vw, 48px) clamp(28px, 5vw, 48px);
+  mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 75%);
+  pointer-events: none;
 }
 
+.loader-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: min(88vw, 420px);
+  transition: opacity 0.5s cubic-bezier(0.83, 0, 0.17, 1),
+    transform 0.5s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.loader-exit .loader-content {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+/* Wordmark with metallic sheen sweep */
 .loader-logo {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
-  font-size: 2.2rem;
-  letter-spacing: 0.3em;
-  margin-bottom: 2rem;
-  color: #fff;
+  font-size: clamp(1.7rem, 6vw, 2.4rem);
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+  /* keeps letterspaced text optically centered */
   text-transform: uppercase;
-  background: linear-gradient(135deg, #ffffff 30%, #5f6262 100%);
+  margin-bottom: clamp(1.6rem, 4vh, 2.4rem);
+}
+
+.loader-logo span {
+  background: linear-gradient(110deg,
+      #ffffff 0%,
+      #ffffff 38%,
+      #7df4ff 50%,
+      #ffffff 62%,
+      #b0b3b8 100%);
+  background-size: 250% 100%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: logo-shimmer 2.5s ease infinite alternate;
+  color: transparent;
+  animation: loader-sheen 2.2s linear infinite;
 }
 
-.progress-bar-container {
+@keyframes loader-sheen {
+  0% {
+    background-position: 120% 0;
+  }
+
+  100% {
+    background-position: -130% 0;
+  }
+}
+
+/* Hairline progress track */
+.loader-track {
   width: 100%;
-  height: 4px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 2px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.07);
   overflow: hidden;
-  margin-bottom: 1rem;
-  position: relative;
+  margin-bottom: 0.9rem;
 }
 
-.progress-bar {
-  width: 0%;
+.loader-bar {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #5f6262, #7df4ff);
-  box-shadow: 0 0 10px var(--accent-glow);
-  transition: width 0.1s ease;
+  background: linear-gradient(90deg, #ffffff, #7df4ff);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
-.progress-text-container {
+/* Status line + live percent */
+.loader-meta {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: 'Space Grotesk', 'Geist Mono', monospace;
+  font-size: clamp(0.62rem, 1.8vw, 0.72rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  font-family: 'Space Grotesk', sans-serif;
-  letter-spacing: 0.05em;
+}
+
+.loader-status::before {
+  content: '// ';
+  color: rgba(0, 240, 255, 0.55);
+}
+
+.loader-percent {
+  color: #ffffff;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Giant ghost counter — outlined, anchored bottom-left */
+.loader-ghost {
+  position: absolute;
+  left: clamp(0.8rem, 4vw, 3rem);
+  bottom: clamp(0.2rem, 2.5vh, 1.5rem);
+  z-index: 1;
+  font-family: 'Geist', 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(5rem, 20vw, 14rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.loader-exit .loader-ghost {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Corner system labels */
+.loader-corner {
+  position: absolute;
+  z-index: 2;
+  font-family: 'Geist Mono', 'Space Grotesk', monospace;
+  font-size: clamp(0.55rem, 1.6vw, 0.65rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(142, 145, 146, 0.5);
+  user-select: none;
+  pointer-events: none;
+}
+
+.loader-corner.tl {
+  top: clamp(1rem, 4vh, 2rem);
+  left: clamp(1rem, 4vw, 2.5rem);
+}
+
+.loader-corner.br {
+  bottom: clamp(1rem, 4vh, 2rem);
+  right: clamp(1rem, 4vw, 2.5rem);
+  animation: loader-blink 1.4s steps(2, start) infinite;
+}
+
+@keyframes loader-blink {
+
+  0%,
+  60% {
+    opacity: 1;
+  }
+
+  61%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-logo span {
+    animation: none;
+  }
+
+  .loader-corner.br {
+    animation: none;
+  }
 }
 
 /* Sticky Canvas Container */
@@ -152,8 +292,6 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
 }
 
 /* Subtle Vignette Overlay */
@@ -214,7 +352,7 @@ body {
 
 /* Dynamically loaded compact styling (Applied on scroll via JS) */
 .header-scrolled #nav-dock {
-  background-color: #050505/85 !important;
+  background-color: rgba(5, 5, 5, 0.85) !important;
   /* Denser glass to stay readable over text */
   padding-top: 0.6rem !important;
   padding-bottom: 0.6rem !important;
@@ -228,28 +366,7 @@ body {
   /* Floating Dock pulls tight to screen edge */
 }
 
-/* Interactive custom hamburger animation styling */
-/* #mobile-menu-toggle:hover span:first-child {
-  transform: translateY(-1px);
-}
-
-#mobile-menu-toggle:hover span:last-child {
-  transform: translateY(1px);
-} */
-
-/* Smoothly translate the drawer in from the right edge */
-#mobile-nav-overlay {
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* FIXED: Toggle selector to open state */
-#mobile-nav-overlay.is-open {
-  transform: translateX(0) !important;
-}
-
 /* Epomaker Galaxy65 Title Overlay */
-/* Epomaker Galaxy65 Title Overlay - Positioned elegant and slightly above center */
 /* ==========================================================================
    1. BASE STYLES (Default / Large Desktops & Screens > 1200px Wide)
    ========================================================================== */
@@ -497,11 +614,6 @@ body {
 
 
 /* ==========================================================================
-   PREMIUM MOBILE TERMINAL DRAWER STYLES
-   ========================================================================== */
-
-/* Drawer Base Link Styling */
-/* ==========================================================================
    PREMIUM KEYBOARD DRAWER STYLES
    ========================================================================== */
 
@@ -627,17 +739,6 @@ body {
   animation: scroll-wheel-anim 1.6s ease-in-out infinite;
 }
 
-/* Animations */
-@keyframes logo-shimmer {
-  0% {
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
-  }
-
-  100% {
-    filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.6));
-  }
-}
-
 @keyframes scroll-wheel-anim {
   0% {
     top: 6px;
@@ -679,7 +780,6 @@ body {
    STYLING MERGED FROM code.html
    ========================================================================== */
 
-/* Custom Cursor */
 /* ==========================================================================
    PREMIUM CUSTOM CURSOR (Magnetic & Blend Mode)
    ========================================================================== */
@@ -705,7 +805,8 @@ body {
 .cursor-dot {
   width: 5px;
   height: 5px;
-  background-color: #272525;
+  background-color: #f2f2f2;
+  mix-blend-mode: difference;
   transition: opacity 0.2s ease-out;
 }
 
@@ -861,7 +962,8 @@ body {
 /* The card frame and text stay perfectly stationary */
 .switch-card {
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
-  transform: none !important; /* Prevents the card itself from moving */
+  transform: none !important;
+  /* Prevents the card itself from moving */
 }
 
 /* Only the switch image plunges down */
@@ -873,14 +975,18 @@ body {
 /* On click, the image dives down and scales down slightly */
 .switch-card.active-press .switch-img-wrapper {
   transform: translateY(12px) scale(0.93) !important;
-  transition: transform 0.03s cubic-bezier(0.075, 0.82, 0.165, 1) !important; /* Instant snap down */
+  transition: transform 0.03s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+  /* Instant snap down */
 }
 
 .switch-bg-text {
   font-family: 'Geist', 'Space Grotesk', sans-serif;
-  font-size: 10rem; /* Massive text */
-  font-weight: 900; /* Extra Black */
-  letter-spacing: -0.05em; /* Tightly packed letters */
+  font-size: 10rem;
+  /* Massive text */
+  font-weight: 900;
+  /* Extra Black */
+  letter-spacing: -0.05em;
+  /* Tightly packed letters */
   line-height: 1;
   text-transform: uppercase;
   transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
