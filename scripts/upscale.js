@@ -5,7 +5,6 @@ import sharp from 'sharp';
 const sourceDir = path.resolve('zip folder');
 const targetDir = path.resolve('public/frames');
 
-// Ensure target directory exists
 if (!fs.existsSync(targetDir)) {
   fs.mkdirSync(targetDir, { recursive: true });
 }
@@ -19,7 +18,6 @@ async function upscaleImages() {
 
   const startTime = Date.now();
 
-  // Process frames in parallel batches of 10 to not overflow memory
   const batchSize = 10;
   for (let i = 0; i < files.length; i += batchSize) {
     const batch = files.slice(i, i + batchSize);
